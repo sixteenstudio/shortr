@@ -1,0 +1,19 @@
+{
+    "name": "matthewcollison/url-shortener",
+    "description": "A basic URL shortener",
+    "type": "project",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Matthew Collison",
+            "email": "matthew@sixteenstudio.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
