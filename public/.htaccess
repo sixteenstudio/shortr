@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    # Make sure the visitor can't access index.php directly
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php
+    RewriteRule ^index.php/?(.*)$ $1 [R=301,L]
+
+    # When the user isn't requesting a file, set their URI & query string to appear after index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php/$1?%{QUERY_STRING} [L]
+</IfModule>
