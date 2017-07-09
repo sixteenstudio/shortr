@@ -13,6 +13,13 @@ class Application
     private $container;
 
     /**
+     * The application router.
+     *
+     * @var Router
+     */
+    private $router;
+
+    /**
      * Application constructor.
      *
      * @param array $configuration
@@ -35,29 +42,47 @@ class Application
      */
     public function run()
     {
-        $this->outputHeaders();
-        $this->outputContent();
+        if ( ! $this->router->executeForCurrentRequest()) {
+            $this->abort(404);
+        }
     }
 
     /**
-     * Output the application heades.
+     * Abort the application.
+     *
+     * @param $httpCode
+     * @return void
+     */
+    public function abort($httpCode)
+    {
+        http_response_code($httpCode);
+        include('../views/errors/404.php');
+        die();
+    }
+
+    /**
+     * Output the application headers.
      *
      * @return void
      */
     public function outputHeaders()
     {
-        // TODO: Output headers
+        http_response_code($this->router->getResponse()->getHttpCode());
+        if ($this->router->getResponse()->hasHeaders()) {
+            print($this->router->getResponse()->getHeaders());
+        }
     }
 
     /**
-     * Output the application heades.
+     * Output the application headers.
      *
      * @return void
      */
     public function outputContent()
     {
-        // TODO: Output content
-        echo 'Welcome!';
+        if ($this->router->getResponse()->hasBody()) {
+            print($this->router->getResponse()->getBody());
+        }
     }
 
     /**
@@ -70,6 +95,9 @@ class Application
 
         // Create the container instance for this application with specified dependencies
         $this->container = new Container($dependencies);
+
+        // Set up the router
+        $this->router = new Router($this->confiugration['routes']);
     }
 
 }
