@@ -48,6 +48,14 @@ class Application
     }
 
     /**
+     * Make the requested entity using the application container.
+     */
+    public function make($entity)
+    {
+        return $this->container->make($entity);
+    }
+
+    /**
      * Abort the application.
      *
      * @param $httpCode

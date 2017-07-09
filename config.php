@@ -8,9 +8,10 @@ return [
     'routes' => [
         [
             'matcher' => function () {
-                if ($_SERVER['request_uri'] === '/') {
-
+                if (in_array($_SERVER['request_uri'], ['/', ''])) {
+                    return true;
                 }
+                return false;
             },
             'uses' => function () {
 
