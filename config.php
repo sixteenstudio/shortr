@@ -2,7 +2,9 @@
 
 return [
     'dependencies' => [
-        'shared' => [],
+        'shared' => [
+            \App\View::class => \App\View::class
+        ],
         'bound' => [],
     ],
     'routes' => [

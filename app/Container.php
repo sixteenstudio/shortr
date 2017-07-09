@@ -75,15 +75,32 @@ class Container
      */
     protected function getDependencyImplementation($requestedEntity)
     {
+        // If the requested entity is a singleton that's already been instantiated, just return that.
+        if ($this->singletons[$requestedEntity]) {
+            return $this->singletons[$requestedEntity];
+        }
+
+        // If the entity is shared, bind it to the container so it only needs to be instantiated once.
+        $isShared = false;
+
         if (isset($this->dependencies['shared'][$requestedEntity])) {
             $concrete = $this->dependencies['shared'][$requestedEntity];
+            $isShared = true;
         } else {
             $concrete = $this->dependencies['bound'][$requestedEntity];
         }
 
         if ($concrete instanceof Closure) {
-            return $concrete();
+            if ($isShared) {
+                return $this->singletons[$requestedEntity] = $concrete();
+            }
+
+            return $concrete;
         } else {
+            if ($isShared) {
+                return $this->singletons[$requestedEntity] = new $concrete;
+            }
+
             return new $concrete;
         }
     }

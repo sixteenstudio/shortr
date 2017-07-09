@@ -8,6 +8,6 @@ if ( ! function_exists('app')) {
 
     function view()
     {
-        return new \App\View();
+        return app()->make(\App\View::class);
     }
 }
