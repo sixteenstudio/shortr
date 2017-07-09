@@ -12,6 +12,13 @@ class Router {
     protected $routes;
 
     /**
+     * The response for this route.
+     *
+     * @var Response
+     */
+    protected $response;
+
+    /**
      * Router constructor.
      *
      * @param array $routes
@@ -26,7 +33,24 @@ class Router {
      */
     public function executeForCurrentRequest()
     {
+        foreach ($this->routes as $route) {
+            if ($route['matcher']()) {
+                $this->response = $route['uses']();
+                return true;
+            }
+        }
 
+        return false;
+    }
+
+    /**
+     * Get the response for the current route.
+     *
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
 }

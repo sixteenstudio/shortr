@@ -81,7 +81,7 @@ class Response
      */
     public function getHttpCode()
     {
-        return $this->body;
+        return $this->httpCode;
     }
 
 }

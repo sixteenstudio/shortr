@@ -45,6 +45,9 @@ class Application
         if ( ! $this->router->executeForCurrentRequest()) {
             $this->abort(404);
         }
+
+        $this->outputHeaders();
+        $this->outputContent();
     }
 
     /**
@@ -105,7 +108,7 @@ class Application
         $this->container = new Container($dependencies);
 
         // Set up the router
-        $this->router = new Router($this->confiugration['routes']);
+        $this->router = new Router($this->configuration['routes']);
     }
 
 }

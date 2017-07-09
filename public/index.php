@@ -6,7 +6,9 @@ require('../vendor/autoload.php');
 $configuration = require('../config.php');
 
 // Instantiate the application instance
-$application = new \App\Application($configuration);
+$app = new \App\Application($configuration);
+
+require '../helpers.php';
 
 // Run the application
-$application->run();
+$app->run();

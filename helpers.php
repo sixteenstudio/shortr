@@ -3,7 +3,8 @@
 if ( ! function_exists('app')) {
     function app()
     {
-        return $application;
+        global $app;
+        return $app;
     }
 
     function view()

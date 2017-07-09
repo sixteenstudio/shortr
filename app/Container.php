@@ -76,7 +76,7 @@ class Container
     protected function getDependencyImplementation($requestedEntity)
     {
         // If the requested entity is a singleton that's already been instantiated, just return that.
-        if ($this->singletons[$requestedEntity]) {
+        if (isset($this->singletons[$requestedEntity])) {
             return $this->singletons[$requestedEntity];
         }
 
