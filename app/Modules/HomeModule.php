@@ -2,6 +2,7 @@
 
 namespace App\Modules;
 
+use App\Repositories\Contracts\UrlRepository;
 use App\Response;
 
 class HomeModule
@@ -56,10 +57,19 @@ class HomeModule
 
         $urlShortened = false;
 
-        if ( ! $urlShortened) {
+        $urlRepository = app()->make(UrlRepository::class);
+        $url = $urlRepository->store($url, substr(uniqid('', true), 0, 8));
+
+        if ( ! $url) {
             $_SESSION['errors'] = 'Sorry, something went wrong when trying to shorten your URL!';
             return $this->errorRedirect();
         } else {
+            if ( ! isset($_SESSION['myUrls'])) {
+                $_SESSION['myUrls'] = [];
+            }
+
+            $_SESSION['myUrls'][] = $url;
+
             $_SESSION['messages'] = 'New URL created!';
             return new Response(['Location: /my-urls'], '', 302);
         }

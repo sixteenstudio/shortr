@@ -20,7 +20,7 @@ class UrlRepository implements \App\Repositories\Contracts\UrlRepository
     public function __construct()
     {
         $this->connection = new \PDO('mysql:host=' . config()['database']['host'] . ';dbname=' . config()['database']['name'] . '', config()['database']['user'], config()['database']['pass']);
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -32,11 +32,13 @@ class UrlRepository implements \App\Repositories\Contracts\UrlRepository
      */
     public function store($url, $slug)
     {
-        $statement = $this->connection->prepare('INSERT INTO urls (url, slug, created_at) VALUES (:url, :slug, :created_at)');
+        $statement = $this->connection->prepare('INSERT INTO urls (redirect_to, slug, created_at) VALUES (:url, :slug, :created_at)');
+
+        $date = date('Y-m-d H:i:s');
 
         $statement->bindParam(':url', $url, \PDO::PARAM_STR);
         $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
-        $statement->bindParam(':created_at', date('Y-m-d H:i:s'), \PDO::PARAM_STR);
+        $statement->bindParam(':created_at', $date, \PDO::PARAM_STR);
 
         $statement->execute();
 
@@ -55,7 +57,7 @@ class UrlRepository implements \App\Repositories\Contracts\UrlRepository
         $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
         $statement->execute();
 
-        return (bool) $statement->fetch(PDO::FETCH_ASSOC);
+        return (bool) $statement->fetch(\PDO::FETCH_ASSOC);
     }
 
     /**
@@ -70,7 +72,7 @@ class UrlRepository implements \App\Repositories\Contracts\UrlRepository
         $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
         $statement->execute();
 
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetch(\PDO::FETCH_ASSOC);
     }
     
 }
