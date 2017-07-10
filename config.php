@@ -3,7 +3,8 @@
 return [
     'dependencies' => [
         'shared' => [
-            \App\View::class => \App\View::class
+            \App\View::class => \App\View::class,
+            \App\Repositories\Contracts\UrlRepository::class => \App\Repositories\PDO\UrlRepository::class
         ],
         'bound' => [],
     ],

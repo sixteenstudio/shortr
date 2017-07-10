@@ -98,6 +98,11 @@ class Application
         }
     }
 
+    public function config()
+    {
+        return $this->configuration;
+    }
+
     /**
      * Boot the application.
      */
