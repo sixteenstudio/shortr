@@ -80,7 +80,9 @@ class Application
     {
         http_response_code($this->router->getResponse()->getHttpCode());
         if ($this->router->getResponse()->hasHeaders()) {
-            print($this->router->getResponse()->getHeaders());
+            foreach ($this->router->getResponse()->getHeaders() as $header) {
+                header($header);
+            }
         }
     }
 

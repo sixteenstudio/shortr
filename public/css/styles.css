@@ -7,6 +7,13 @@ html, body {
 h1 {
     font-size: 24px;
     color: #1157a6;
+    margin-bottom: 7px;
+}
+
+h2 {
+    font-size: 16px;
+    color: #8d95a5;
+    margin-top: 0;
 }
 
 .top-bar {
@@ -30,7 +37,6 @@ h1 {
     padding-bottom: 11px;
     font-size: 12px;
     width: 240px;
-    /* border: 1px; */
     position: relative;
     top: -2px;
     border: 1px solid #ddd;
@@ -71,4 +77,6 @@ h1 {
 .url-form-errors {
     color: darkred;
     font-weight: bold;
+    margin-top: 9px;
+    display: block;
 }

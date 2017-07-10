@@ -1,4 +1,6 @@
 <IfModule mod_rewrite.c>
+    RewriteEngine On
+
     # Make sure the visitor can't access index.php directly
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php
     RewriteRule ^index.php/?(.*)$ $1 [R=301,L]
