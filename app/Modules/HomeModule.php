@@ -68,9 +68,9 @@ class HomeModule
                 $_SESSION['myUrls'] = [];
             }
 
-            $_SESSION['myUrls'][] = $url;
+            array_unshift($_SESSION['myUrls'], $url);
 
-            $_SESSION['messages'] = 'New URL created!';
+            $_SESSION['messages'] = 'URL Successfully Shortened!';
             return new Response(['Location: /my-urls'], '', 302);
         }
     }

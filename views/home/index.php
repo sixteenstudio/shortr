@@ -10,6 +10,10 @@
         <br>
         <span class="url-form-errors"><?php echo $errors ?></span>
     <?php endif; ?>
+    <?php if ( ! empty($_SESSION['myUrls'])): ?>
+    <br><br><br>
+        <a href="/my-urls">View your shortened URLs</a>
+    <?php endif; ?>
 </form>
 
 <?php include '../views/partials/foot.php' ?>

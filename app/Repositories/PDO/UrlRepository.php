@@ -74,5 +74,18 @@ class UrlRepository implements \App\Repositories\Contracts\UrlRepository
 
         return $statement->fetch(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Increment the number of visits on a given shortened URL.
+     *
+     * @param $slug
+     * @return void
+     */
+    public function addVisit($slug)
+    {
+        $statement = $this->connection->prepare('UPDATE urls SET visits = visits + 1 WHERE slug = :slug');
+        $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
+        $statement->execute();
+    }
     
 }

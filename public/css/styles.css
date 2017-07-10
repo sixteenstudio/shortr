@@ -80,3 +80,34 @@ h2 {
     margin-top: 9px;
     display: block;
 }
+
+.shortened-urls {
+    display: block;
+    margin: auto;
+    width: 96%;
+    text-align: center;
+}
+
+.shortened-url {
+    padding: 5px;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    background: #f9f9f9;
+    margin-bottom: 3px;
+}
+
+.url-visited {
+    color: #777;
+}
+
+.success-message {
+    display: block;
+    border-radius: 3px;
+    background: #f3fff4;
+    border: 1px solid #c9e0c9;
+    color: #4a9032;
+    font-size: 19px;
+    padding: 7px;
+    margin-top: 17px
+}
