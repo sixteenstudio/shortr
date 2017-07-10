@@ -101,6 +101,8 @@ class Application
      */
     protected function boot()
     {
+        session_start();
+
         // Extract dependencies from the configuration
         $dependencies = $this->configuration['dependencies'];
 
